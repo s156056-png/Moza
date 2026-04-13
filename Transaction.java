@@ -19,6 +19,6 @@ public class Transaction {
      */
 
     public void display(){
-        System.out.println("ID: " + id + " | Merchant: " + merchant + " | Amount: "+ amount + " | Category: " + category);
+        System.out.printf("ID: %-10d | Merchant: %-15s  | Amount: %-10.2f  | Category: %-10s \n",id,merchant,amount,category);
     }
 }
