@@ -5,6 +5,9 @@ public class Main {
     static Scanner input = new Scanner(System.in);
     static Transaction[] transactions;
     static int size = 0;
+    static Random rand = new Random();
+    private static String[] merchants = {"Starbucks", "Amazon", "Steam Games", "Whole Foods", "Shell Gas", "Netflix"};
+    private static String[] categories= {"Food", "Shopping", "Entertainment", "Groceries", "Transport", "Subscriptions"};
 
     public static void main(String[] args) {
 
@@ -81,7 +84,25 @@ public class Main {
     /** Sort an arry by Insertion sort according to their ID.
      @return Sorted arry by ID.
      */
-    public static void insertionSort() {}
+    public static void insertionSort() {
+         // if user does not enter data for transaction,ask him to enter data  first
+        if (size == 0) {
+            System.out.println("No data available!");
+            return;
+        };
+        int i,j;
+        Transaction temp;
+        for (i = 1; i < size ; i++) {
+            temp = transactions[i];
+            j=i;
+            while ((j > 0 )&& (transactions[j-1].id > temp.id)) {
+                transactions[j] = transactions[j-1];
+                j--;
+            }//while
+            transactions[j] = temp;
+        }//for
+        System.out.println("Sorted by ID!");
+    }
 
 
     /** Search for Transaction by binary search according to their ID.
@@ -99,7 +120,22 @@ public class Main {
     /** Randomly generate data for new Transactions (ask user to specify the data size).
      @return new Transactions generated randomly .
      */
-    public static void generateData(){}
+    public static void generateData(){
+        int current_id = 100000;
+        System.out.println("Enter number of transactions you want to create: ");
+        size = input.nextInt();//user enter the size of transaction array
+        transactions = new Transaction[size];//define transaction array with size user entered
+        for (int i = 0; i < size; i++) {
+            // create small random number
+            current_id+= rand.nextInt(100)+1;// add number between 1 and 100 to ensure it is unique
+            // generate random index to pick merchant and category
+            int index =rand.nextInt(merchants.length);
+            String merchant = merchants[index];
+            String category = categories[index];
+            double amount = (rand.nextInt(50000) + 100) / 100.0 ;//generate random integer between 100 and 50000 and divide it by 100.00 to get two decimal places
+            transactions[i] = new Transaction(current_id,merchant,amount,category);
+        }
+    }
 
 
 }
