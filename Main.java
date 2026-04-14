@@ -30,14 +30,30 @@ public class Main {
             choice = input.nextInt();
 
             switch (choice) {
-                case 1: viewAll(); break;
-                case 2: selectionSort(); break;
-                case 3: insertionSort(); break;
-                case 4: binarySearch(); break;
-                case 5: filterCategory(); break;
-                case 6: generateData(); break;
-                case 7: System.out.println("Goodbye"); break;
-                default:System.out.println("Invalid choice!");
+                case 1:
+                    viewAll();
+                    break;
+                case 2:
+                    selectionSort();
+                    break;
+                case 3:
+                    insertionSort();
+                    isSortedByID = true;
+                    break;
+                case 4:
+                    binarySearch();
+                    break;
+                case 5:
+                    filterCategory();
+                    break;
+                case 6:
+                    generateData();
+                    break;
+                case 7:
+                    System.out.println("Goodbye");
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
             }
 
         } while (choice != 7);
@@ -86,7 +102,7 @@ public class Main {
      @return Sorted arry by ID.
      */
     public static void insertionSort() {
-         // if user does not enter data for transaction,ask him to enter data  first
+        // if user does not enter data for transaction,ask him to enter data  first
         if (size == 0) {
             System.out.println("No data available!");
             return;
@@ -127,7 +143,7 @@ public class Main {
 
         if (index != -1) {
             System.out.println("Transaction found:");
-            System.out.println(transactions[index]);
+            transactions[index].display();
         } else {
             System.out.println("Transaction with ID " + target + " not found.");
         }
@@ -155,7 +171,23 @@ public class Main {
     /** Filter Transactions by Linear search according to their Category.
      @return Filtered transaction.
      */
-    public static void filterCategory() {}
+    public static void filterCategory() {
+        if (size == 0) {
+            System.out.println("No data available!");
+            return;
+        }
+        ArrayList<Transaction> categories = new ArrayList<>();
+        System.out.println("Enter Category: ");
+        String category = input.next();
+        for (int i = 0; i < size; i++) {
+            if (category.equalsIgnoreCase(transactions[i].category)) {
+                categories.add(transactions[i]);
+            }
+        }//print category
+        for(int i = 0; i < categories.size(); i++) {
+            categories.get(i).display();
+        }
+    }
 
 
     /** Randomly generate data for new Transactions (ask user to specify the data size).
