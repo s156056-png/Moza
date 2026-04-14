@@ -108,7 +108,32 @@ public class Main {
     /** Search for Transaction by binary search according to their ID.
      @return Searched transaction.
      */
-    public static void binarySearch(Transaction[] arr, int n, int target) {
+    public static void binarySearch() {
+        if (size == 0) {
+            System.out.println("No transactions yet. Please generate data using option 6 first.");
+            return;
+        }
+        if (!isSortedByID) {
+            System.out.println("List must be sorted by ID first!");
+            System.out.println("Please run Option 3 first.");
+            return;
+        }
+
+        System.out.print("Enter Transaction ID to search: ");
+        int target = input.nextInt();
+
+        int index = binarySearchHelper(transactions, size, target);
+
+        if (index != -1) {
+            System.out.println("Transaction found:");
+            System.out.println(transactions[index]);
+        } else {
+            System.out.println("Transaction with ID " + target + " not found.");
+        }
+    }
+
+    // Helper for Binary Search
+    private static int binarySearchHelper(Transaction[] arr, int n, int target) {
         int left = 0;
         int right = n - 1;
         while (left <= right) {
@@ -124,7 +149,6 @@ public class Main {
         return -1;
     }
 
-    
 
 
     /** Filter Transactions by Linear search according to their Category.
