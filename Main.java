@@ -9,6 +9,7 @@ public class Main {
     private static String[] merchants = {"Starbucks", "Amazon", "Steam Games", "Whole Foods", "Shell Gas", "Netflix"};
     private static String[] categories= {"Food", "Shopping", "Entertainment", "Groceries", "Transport", "Subscriptions"};
     static boolean isSortedByID = false;
+    static int current_id = 100000;
 
     public static void main(String[] args) {
 
@@ -35,6 +36,7 @@ public class Main {
                     break;
                 case 2:
                     selectionSort();
+                    isSortedByID = false;
                     break;
                 case 3:
                     insertionSort();
@@ -78,7 +80,10 @@ public class Main {
      @return Sorted arry by amount.
      */
     public static void selectionSort() {
-        if (size == 0) return;
+        if (size == 0){
+            System.out.println("No data available!");
+            return;
+        }
         for (int i = 0; i < size - 1; i++) {
             int min = i;
 
@@ -98,15 +103,15 @@ public class Main {
         System.out.println("Sorted by Amount!");
     }
 
-    /** Sort an arry by Insertion sort according to their ID.
-     @return Sorted arry by ID.
+    /** Sort an array by Insertion sort according to their ID.
+     @return Sorted array by ID.
      */
     public static void insertionSort() {
         // if user does not enter data for transaction,ask him to enter data  first
         if (size == 0) {
             System.out.println("No data available!");
             return;
-        };
+        }
         int i,j;
         Transaction temp;
         for (i = 1; i < size ; i++) {
@@ -127,7 +132,7 @@ public class Main {
      */
     public static void binarySearch() {
         if (size == 0) {
-            System.out.println("No transactions yet. Please generate data using option 6 first.");
+            System.out.println("No data available!");
             return;
         }
         if (!isSortedByID) {
@@ -176,16 +181,22 @@ public class Main {
             System.out.println("No data available!");
             return;
         }
-        ArrayList<Transaction> categories = new ArrayList<>();
-        System.out.println("Enter Category: ");
-        String category = input.next();
+        ArrayList<Transaction> result = new ArrayList<>();
+        System.out.print("Enter Category: ");
+        input.nextLine();
+        String category = input.nextLine();
         for (int i = 0; i < size; i++) {
             if (category.equalsIgnoreCase(transactions[i].category)) {
-                categories.add(transactions[i]);
+                result.add(transactions[i]);
             }
-        }//print category
-        for(int i = 0; i < categories.size(); i++) {
-            categories.get(i).display();
+        }
+        if(result.isEmpty()){
+            System.out.println("Category not found!");
+        }else {
+            //print category
+            for (int i = 0; i < result.size(); i++) {
+                result.get(i).display();
+            }
         }
     }
 
@@ -194,8 +205,8 @@ public class Main {
      @return new Transactions generated randomly .
      */
     public static void generateData(){
-        int current_id = 100000;
-        System.out.println("Enter number of transactions you want to create: ");
+
+        System.out.print("Enter number of transactions you want to create: ");
         size = input.nextInt();//user enter the size of transaction array
         transactions = new Transaction[size];//define transaction array with size user entered
         for (int i = 0; i < size; i++) {
@@ -208,6 +219,7 @@ public class Main {
             double amount = (rand.nextInt(50000) + 100) / 100.0 ;//generate random integer between 100 and 50000 and divide it by 100.00 to get two decimal places
             transactions[i] = new Transaction(current_id,merchant,amount,category);
         }
+        System.out.println("Data created!");
     }
 
 
