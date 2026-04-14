@@ -108,7 +108,23 @@ public class Main {
     /** Search for Transaction by binary search according to their ID.
      @return Searched transaction.
      */
-    public static void binarySearch() {}
+    public static void binarySearch(Transaction[] arr, int n, int target) {
+        int left = 0;
+        int right = n - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid].id == target) {
+                return mid;
+            } else if (arr[mid].id < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return -1;
+    }
+
+    }
 
 
     /** Filter Transactions by Linear search according to their Category.
