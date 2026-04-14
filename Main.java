@@ -8,6 +8,7 @@ public class Main {
     static Random rand = new Random();
     private static String[] merchants = {"Starbucks", "Amazon", "Steam Games", "Whole Foods", "Shell Gas", "Netflix"};
     private static String[] categories= {"Food", "Shopping", "Entertainment", "Groceries", "Transport", "Subscriptions"};
+    static boolean isSortedByID = false;
 
     public static void main(String[] args) {
 
