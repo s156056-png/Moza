@@ -1,3 +1,194 @@
+/**
+Start
+
+    Declare transactions array
+    Declare size = 0
+    Declare isSortedByID = false
+    Declare current_id = 100000
+
+    merchants = ["Starbucks", "Amazon", "Steam Games", "Whole Foods", "Shell Gas", "Netflix"]
+    categories = ["Food", "Shopping", "Entertainment", "Groceries", "Transport", "Subscriptions"]
+
+    Do
+        Print "--- PocketBank Admin Menu ---"
+        Print "1. View All Transactions"
+        Print "2. Sort by Amount (Selection Sort)"
+        Print "3. Sort by ID (Insertion Sort)"
+        Print "4. Search by ID (Binary Search)"
+        Print "5. Filter by Category"
+        Print "6. Generate Random Transactions"
+        Print "7. Exit"
+
+        Print "Enter your choice: "
+        Read choice
+
+        If choice == 1 Then
+            viewAll()
+
+        Else If choice == 2 Then
+            selectionSort()
+            isSortedByID = false
+
+        Else If choice == 3 Then
+            insertionSort()
+            isSortedByID = true
+
+        Else If choice == 4 Then
+            binarySearch()
+
+        Else If choice == 5 Then
+            filterCategory()
+
+        Else If choice == 6 Then
+            generateData()
+
+        Else If choice == 7 Then
+            Print "Goodbye"
+
+        Else
+            Print "Invalid choice!"
+        End If
+
+    While choice != 7
+
+End
+
+
+// Function viewAll
+Function viewAll()
+    If size == 0 Then
+        Print "No data available!"
+        Return
+    End If
+
+    For i = 0 to size-1
+        Display transactions[i]
+    End For
+End Function
+
+
+// Function selectionSort
+Function selectionSort()
+    If size == 0 Then
+        Print "No data available!"
+        Return
+    End If
+
+    For i = 0 to size-2
+        min = i
+        For j = i+1 to size-1
+            If transactions[j].amount < transactions[min].amount Then
+                min = j
+            End If
+        End For
+
+        Swap transactions[i] with transactions[min]
+    End For
+
+    Print "Sorted by Amount!"
+End Function
+
+
+// Function insertionSort
+Function insertionSort()
+    If size == 0 Then
+        Print "No data available!"
+        Return
+    End If
+
+    For i = 1 to size-1
+        temp = transactions[i]
+        j = i
+
+        While j > 0 and transactions[j-1].id > temp.id
+            transactions[j] = transactions[j-1]
+            j = j - 1
+        End While
+
+        transactions[j] = temp
+    End For
+
+    Print "Sorted by ID!"
+End Function
+
+
+// Function binarySearch
+Function binarySearch()
+    If size == 0 Then
+        Print "No data available!"
+        Return
+    End If
+
+    If isSortedByID == false Then
+        Print "List must be sorted by ID first!"
+        Print "Please run Option 3 first."
+        Return
+    End If
+
+    Print "Enter Transaction ID: "
+    Read target
+
+    index = binarySearchHelper(target)
+
+    If index != -1 Then
+        Print "Transaction found:"
+        Display transactions[index]
+    Else
+        Print "Transaction not found!"
+    End If
+End Function
+
+
+// Function filterCategory
+Function filterCategory()
+    If size == 0 Then
+        Print "No data available!"
+        Return
+    End If
+
+    Print "Enter Category: "
+    Read category
+
+    found = false
+
+    For i = 0 to size-1
+        If category equalsIgnoreCase transactions[i].category Then
+            Display transactions[i]
+            found = true
+        End If
+    End For
+
+    If found == false Then
+        Print "Category not found!"
+    End If
+End Function
+
+
+// Function generateData
+Function generateData()
+    Print "Enter number of transactions: "
+    Read size
+
+    Create transactions array with new size
+
+    For i = 0 to size-1
+        current_id = current_id + random(1 to 100)
+        index = random(0 to 5)
+        merchant = merchants[index]
+        category = categories[index]
+        amount = random(1.00 to 500.00)
+
+        transactions[i] = new Transaction(current_id, merchant, amount, category)
+    End For
+
+    Print "Data created!"
+End Function
+
+End
+**/
+
+
+
 import java.util.*;
 
 public class Main {
