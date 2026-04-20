@@ -19,7 +19,7 @@ public class Transaction {
 
      */
     public void display(){
-        System.out.printf("ID: %-10d | Merchant: %-15s  | Amount: %-10.2f  | Category: %-12s | Date: %s\n",
+        System.out.printf("ID: %-10d | Merchant: %-15s  | Amount: %-10.2f  | Category: %-15s | Date: %s\n",
                           id, merchant, amount, category, date);
     }
 }
