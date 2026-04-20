@@ -220,10 +220,10 @@ public class Main {
             String merchant = merchants[index];
             String category = categories[index];
             double amount = (rand.nextInt(50000) + 100) / 100.0 ;//generate random integer between 100 and 50000 and divide it by 100.00 to get two decimal places
-            LocalDate today = LocalDate.now();
+            LocalDate today = LocalDate.now(); // return today's date
             int daysBack = rand.nextInt(30);                    // random day from last 30 days
-            LocalDate randomDate = today.minusDays(daysBack);
-            String dateStr = randomDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate randomDate = today.minusDays(daysBack); // subtract daysback from today date 
+            String dateStr = randomDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); // convert it to yyyy-mm-dd format
             
             transactions[i] = new Transaction(current_id,merchant,amount,category, dateStr);   
         }
