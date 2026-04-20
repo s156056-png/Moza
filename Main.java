@@ -1,4 +1,6 @@
 import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
 
@@ -212,12 +214,18 @@ public class Main {
         for (int i = 0; i < size; i++) {
             // create small random number
             current_id+= rand.nextInt(100)+1;// add number between 1 and 100 to ensure it is unique
-            // generate random index to pick merchant and category
+            // generate random index to pick merchant
+            // and category
             int index =rand.nextInt(merchants.length);
             String merchant = merchants[index];
             String category = categories[index];
             double amount = (rand.nextInt(50000) + 100) / 100.0 ;//generate random integer between 100 and 50000 and divide it by 100.00 to get two decimal places
-            transactions[i] = new Transaction(current_id,merchant,amount,category);
+            LocalDate today = LocalDate.now();
+            int daysBack = rand.nextInt(30);                    // random day from last 30 days
+            LocalDate randomDate = today.minusDays(daysBack);
+            String dateStr = randomDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            
+            transactions[i] = new Transaction(current_id,merchant,amount,category, dateStr);   
         }
         System.out.println("Data created!");
     }
